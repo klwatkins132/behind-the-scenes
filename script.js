@@ -1,7 +1,110 @@
 'use strict';
 ///////////////////////////////////////
-// The this Keyword Introduction
+// Regular Functions vs. Arrow Functions
 
+var firstName = 'jeff';  // will print jeff with the greet function because 'this' and 'var' are on the global window object
+const kelsy = {
+    firstName: 'Kelsy',
+    year: 1991,
+    calcAge: function () {
+        return 2022 - this.year;
+    },
+    /****This is an object literal, not a code block***/
+    // never use an aarrow function as a method
+    greet: () => console.log(`hey ${this.firstName}`), // prints hey undefined,  'this keyword' is on the window object and there is no firstName on the window object
+    // parent scope of the greet method is the global scope
+    // becomes window.firstName
+};
+kelsy.greet();
+
+
+const kelsy2 = {
+    firstName: 'Kelsy',
+    year: 1991,
+    calcAge: function () {
+        return 2022 - this.year;
+    },
+
+    greet: function () {
+        console.log(`hey ${this.firstName} you're ${this.calcAge()} years old`);
+
+        //'this' equals the global object which is window and below code will not work
+        // const isMillenial = function () {
+        //     if (this.year >= 1981 && this.year <= 1996) {
+        //         console.log('...and you are a millenial');
+        //     }
+        // };
+
+        // use self to make the above function work
+        // const self = this;
+
+        // const isMillenial = function () {
+        //     if (self.year >= 1981 && self.year <= 1996) {
+        //         console.log('...and you are a millenial');
+        //     }
+        // };
+
+        // With arrow functions the this keyword always represents the object that defined the arrow function.
+        const isMillenial = () => {
+            if (this.year >= 1981 && this.year <= 1996) {
+                console.log('...and you are a millenial');
+            }
+        };
+        isMillenial();
+    }
+};
+kelsy2.greet();
+
+/*****************solution to 'this' undefined in regular function call***************/
+const kelsy3 = {
+    firstName: 'kelsy',
+    year: 1991,
+    calcAge: function () {
+        // console.log(this);
+        console.log(2037 - this.year);
+
+        // Solution 1
+        // const self = this; // self or that
+        // const isMillenial = function () {
+        //   console.log(self);
+        //   console.log(self.year >= 1981 && self.year <= 1996); // in scope chain 'self' will be equal to 'this' so when refrenced in self.year it will go up the scope to calcAge
+        // };
+
+        // Solution 2
+        const isMillenial = () => {
+            console.log(this);
+            console.log(this.year >= 1981 && this.year <= 1996);
+        };
+        isMillenial();
+    },
+
+    greet: () => {
+        console.log(this);
+        console.log(`Hey ${this.firstName}`);  // this line is an object literal not a code block so it refrences the global scope not the object kelsy
+    },
+};
+kelsy3.greet();  // prints hey undefined
+kelsy3.calcAge();
+
+// arguments keyword
+const addExpr = function (a, b) {
+    console.log(arguments);
+    return a + b;
+};
+addExpr(2, 5);
+addExpr(2, 5, 8, 12);
+
+var addArrow = (a, b) => {
+    // console.log(arguments);
+    return a + b;
+};
+addArrow(2, 5, 8);
+
+
+
+///////////////////////////////////////
+// The this Keyword Introduction
+/*
 const kelsy1 = {    // object kelsy
     name: 'Kelsy',
     year: 1991,
@@ -49,8 +152,8 @@ matt.calcAge = kelsy2.calcAge; // method borrowing, do not have to write calcAge
 matt.calcAge(); // this keyword now points to matt...matt called the method
 
 const f = kelsy2.calcAge; // copying method into variable, f becomes calcAge function
-f(); // *Type error* because f becomes a regular function call, not attahced to any object so this keyword doenst know where to point to 
-
+f(); // *Type error* because f becomes a regular function call, not attahced to any object so this keyword doenst know where to point to
+*/
 
 
 ///////////////////////////////////////
