@@ -11,8 +11,6 @@ const kelsy1 = {    // object kelsy
 };
 console.log(kelsy1.calcAge());
 
-
-
 console.log(this); // this keyword of parent scope which is window object
 
 const calcAge = function (birthYear) {
@@ -41,8 +39,17 @@ const kelsy2 = {    // object kelsy
     }
 };
 kelsy2.calcAge();
-// kelsy.calcAge(1991); // 'this' keyword helps not having to repeat this information inside the object
+//kelsy2.calcAge(1991); // 'this' keyword helps not having to repeat this information inside the object
 
+const matt = {
+    year: 2017,
+}
+
+matt.calcAge = kelsy2.calcAge; // method borrowing, do not have to write calcAge out, need to do this before you call another object to the method
+matt.calcAge(); // this keyword now points to matt...matt called the method
+
+const f = kelsy2.calcAge; // copying method into variable, f becomes calcAge function
+f(); // *Type error* because f becomes a regular function call, not attahced to any object so this keyword doenst know where to point to 
 
 
 
