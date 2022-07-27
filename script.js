@@ -1,6 +1,7 @@
 'use strict';
 ///////////////////////////////////////
 // Objects vs. primitives
+
 /*
 Identifier points to the address and not the value itself 
 So, age variable is equal to memory address 0001 which holds the value of 30
@@ -14,9 +15,9 @@ age = 31;
 console.log(age); // 31
 console.log(oldAge); //30
 /*
-1.	When a new object is created it is stored in the heap with memory address then value itself
-2.	Me identifier points to new piece of memory in the stack
-3.	Memory in the stack points to the object in the heap by using memory address as its value
+1.When a new object is created it is stored in the heap with memory address then value itself
+2.Me identifier points to new piece of memory in the stack
+3.Memory in the stack points to the object in the heap by using memory address as its value
 The piece of memory in the call stack has a reference to the piece of memory in the heap which hold(me) object which is why their called reference types! 
 We do this because an object may be to large to be stored in the stack.
 Friend can be const because you’re not changing the value in the call stack your changing the value in the heap.
@@ -76,6 +77,7 @@ console.log('After marriage: ', jessicaCopy); // array object is at the same mem
 
 ///////////////////////////////////////
 // Regular Functions vs. Arrow Functions
+
 /*
 var firstName = 'jeff';  // will print jeff with the greet function because 'this' and 'var' are on the global window object
 const kelsy = {
@@ -179,6 +181,7 @@ addArrow(2, 5, 8);
 
 ///////////////////////////////////////
 // The this Keyword Introduction
+
 /*
 const kelsy1 = {    // object kelsy
     name: 'Kelsy',
@@ -233,8 +236,8 @@ f(); // *Type error* because f becomes a regular function call, not attahced to 
 
 ///////////////////////////////////////
 // Hoisting
-/*
 
+/*
 // Variables
 const myName = 'Kelsy';
 if (myName === 'Kelsy') {
@@ -300,6 +303,7 @@ console.log(z === window.z);  // is x a property of the window object? false
 
 ///////////////////////////////////////
 // Scoping pt2
+
 /*
 function calcAge(birthYear) {
     const age = 2022 - birthYear;
@@ -342,6 +346,7 @@ calcAge(1991);
 
 ///////////////////////////////////////
 // Scoping pt1
+
 /*
 function calcAge(birthYear) {  // global scope
     const age = 2022 - birthYear;
