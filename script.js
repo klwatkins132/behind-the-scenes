@@ -1,7 +1,54 @@
 'use strict';
 ///////////////////////////////////////
-// Hoisting
+// The this Keyword Introduction
 
+const kelsy1 = {    // object kelsy
+    name: 'Kelsy',
+    year: 1991,
+    calcAge: function () {     // calcAge is the method
+        return 2022 - this.year; //same as kelsy.year which in turn would be kelsy.1991
+    }
+};
+console.log(kelsy1.calcAge());
+
+
+
+console.log(this); // this keyword of parent scope which is window object
+
+const calcAge = function (birthYear) {
+    console.log(2022 - birthYear);
+    console.log(this);  // undefined because of strict mode, gets its own this keyword
+};
+calcAge(1991); // regular function call, call of the function without function being attached to any object or 'owner'
+
+
+const calcAgeArrow = birthYear => {
+    console.log(2022 - birthYear);
+    console.log(this); // this keyword of parent scope which is window object
+};
+calcAgeArrow(1980);
+
+// calcAge method is written inside kelsy object, this is not why 'this' keyword points to kelsy,
+// it points to the object becuase the kelsy was the object calling the method -- kelsy.calcAge() --
+const kelsy2 = {    // object kelsy
+    year: 1991,
+    calcAge: function () {
+        console.log(2022 - this.year);
+
+        // inside of calcAge 'this' is kelsy
+        console.log(this); // 'this' object, will print contents of kelsy
+        // when there is a method call the 'this' keyword inside of the method will be the object that is calling the method..the kelsy object
+    }
+};
+kelsy2.calcAge();
+// kelsy.calcAge(1991); // 'this' keyword helps not having to repeat this information inside the object
+
+
+
+
+///////////////////////////////////////
+// Hoisting
+/*
 
 // Variables
 const myName = 'Kelsy';
@@ -63,6 +110,8 @@ const z = 3;
 console.log(x === window.x);  // is x a property of the window object? true
 console.log(y === window.y);  // is x a property of the window object? false
 console.log(z === window.z);  // is x a property of the window object? false
+*/
+
 
 ///////////////////////////////////////
 // Scoping pt2
